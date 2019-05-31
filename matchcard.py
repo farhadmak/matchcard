@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
 # Created by Farhad Makiabady
+
+# References:
 # https://www.geeksforgeeks.org/python-check-if-element-exists-in-list-of-lists/
 # https://www.geeksforgeeks.org/clear-screen-python/
 
@@ -7,8 +9,17 @@ import random
 from os import system, name
 
 def coordInput():
-    size = int(input("Please select a size you wish to play (2, 4 or 6): "))
-    return size
+    while True:
+        try:
+            size = int(input("Please select a size you wish to play (2, 4): "))
+
+            if ((size != 2) and (size != 4)):
+                print("Please select 2 or 4")
+                continue
+            return size
+        except ValueError: 
+            print("Please select an integer.")
+    
 
 def createGrid(size):
     return [["0"] * size for _ in range(size)]
@@ -42,18 +53,44 @@ def clear():
         _ = system('clear')
 
 def playTurn(grid, answerGrid):
-    x1, y1 = [int(x) for x in input("Enter the coordinates of the first card you would like to flip (x, y): ").split()]
-    # print(answerGrid[y1 - 1][x1 - 1])
-    grid[y1 - 1][x1 - 1] = answerGrid[y1 - 1][x1 - 1]
+    
+    while True:
+        try:
+            x1, y1 = [int(x) for x in input("Enter the coordinates of the first card you would like to flip (x, y): ").split()]
+            if grid[y1 - 1][x1 - 1] == "0":
+                grid[y1 - 1][x1 - 1] = answerGrid[y1 - 1][x1 - 1]
+                break
+            else:
+                print("You have previously flipped this card! Try again!")
+        except ValueError:
+            print("Something isn't right! Try the coordinates again.")
+            continue
+        except IndexError:
+            print("Out of range!")
+            continue
     printGrid(grid)
 
-    x2, y2 = [int(x) for x in input("Enter the coordinates of the second card you would like to flip (x, y): ").split()]
-
-    grid[y2 - 1][x2 - 1] = answerGrid[y2 - 1][x2 - 1]
+    
+    while True:
+        try:
+            x2, y2 = [int(x) for x in input("Enter the coordinates of the second card you would like to flip (x, y): ").split()]
+            if grid[y2 - 1][x2 - 1] == "0":
+                grid[y2 - 1][x2 - 1] = answerGrid[y2 - 1][x2 - 1]
+                break
+            else:
+                print("You have previously flipped this card! Try again!")
+        except ValueError:
+            print("Something isn't right! Try the coordinates again.")
+            continue
+        except IndexError:
+            print("Out of range!")
+    
     printGrid(grid)
 
     if grid[y1 - 1][x1 - 1] == answerGrid[y2 - 1][x2 - 1]:
         print("Yay! You got it!")
+        input("Press Enter to try again.")
+        clear()
     else:
         print("Whoops! Try again!")
         grid[y1 - 1][x1 - 1] = "0"
@@ -78,6 +115,12 @@ def main():
         while not gameOver(grid):
             printGrid(grid)
             playTurn(grid, answerGrid)
+        if gameOver(grid):
+            playAgain = input("Congratz! You won! Would you like to play again? Y/N")
+            if playAgain == Y:
+                continue
+            else:
+                break
 
     
 
