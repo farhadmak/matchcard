@@ -89,7 +89,7 @@ def playTurn(grid, answerGrid):
 
     if grid[y1 - 1][x1 - 1] == answerGrid[y2 - 1][x2 - 1]:
         print("Yay! You got it!")
-        input("Press Enter to try again.")
+        input("Press Enter to continue.")
         clear()
     else:
         print("Whoops! Try again!")
@@ -116,10 +116,11 @@ def main():
             printGrid(grid)
             playTurn(grid, answerGrid)
         if gameOver(grid):
-            playAgain = input("Congratz! You won! Would you like to play again? Y/N")
-            if playAgain == Y:
+            playAgain = input("Congratz! You won! Would you like to play again? Y/N: ")
+            if playAgain == "Y" or playAgain == "y":
                 continue
             else:
+                print("Thank you for playing, see you around!")
                 break
 
     
