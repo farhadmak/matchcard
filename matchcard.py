@@ -116,7 +116,7 @@ def main():
             score = playTurn(grid, answerGrid, score)
         
         if gameOver(grid):
-            print("Your final score is {}!".format(score))
+            print("Your final score (number of guesses) is {}!".format(score))
             playAgain = input("Congratz! You won! Would you like to play again? Y/N: ")
             if playAgain == "Y" or playAgain == "y":
                 continue
