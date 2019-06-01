@@ -55,7 +55,7 @@ def playTurn(grid, answerGrid):
     # This function handles the matching of two cards chosen by user
     while True:
         try:
-            x1, y1 = [int(x) for x in input("Enter the coordinates of the first card you would like to flip (x, y): ").split()]
+            x1, y1 = [int(x) for x in input("Enter the coordinates of the first card you would like to flip (x y): ").split()]
             if grid[y1 - 1][x1 - 1] == "0":
                 grid[y1 - 1][x1 - 1] = answerGrid[y1 - 1][x1 - 1]
                 break
@@ -71,7 +71,7 @@ def playTurn(grid, answerGrid):
 
     while True:
         try:
-            x2, y2 = [int(x) for x in input("Enter the coordinates of the second card you would like to flip (x, y): ").split()]
+            x2, y2 = [int(x) for x in input("Enter the coordinates of the second card you would like to flip (x y): ").split()]
             if grid[y2 - 1][x2 - 1] == "0":
                 grid[y2 - 1][x2 - 1] = answerGrid[y2 - 1][x2 - 1]
                 break
