@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# Match Card Game
 # Created by Farhad Makiabady
 
 # References:
@@ -12,7 +12,6 @@ def coordInput():
     while True:
         try:
             size = int(input("Please select a size you wish to play (2, 4): "))
-
             if ((size != 2) and (size != 4)):
                 print("Please select 2 or 4")
                 continue
@@ -29,13 +28,13 @@ def printGrid(grid):
         print(row)
 
 def populateGrid(answerGrid, size):
+    # This function populates an answerGrid with the answers to the game
     cards = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
     selectedCards = random.sample(cards, int(size**2 / 2))
-    # answerGrid = createGrid(size)
     
-    while any("0" in sublist for sublist in answerGrid):
+    while any("0" in sublist for sublist in answerGrid): # While no "0"s in answerGrid
         randomCard = random.choice(selectedCards)
-        if sum(elem.count(randomCard) for elem in answerGrid) < 2:
+        if sum(elem.count(randomCard) for elem in answerGrid) < 2: # if count of randomCard is  less than 2
             x = random.randint(0, size - 1)
             y = random.randint(0, size - 1)
             if answerGrid[y][x] == "0":
@@ -44,6 +43,7 @@ def populateGrid(answerGrid, size):
             randomCard = random.choice(selectedCards)
 
 def clear(): 
+    # This function clears the screen so you do not see your previous play
     # for windows 
     if name == 'nt': 
         _ = system('cls') 
@@ -53,7 +53,7 @@ def clear():
         _ = system('clear')
 
 def playTurn(grid, answerGrid):
-    
+    # This function handles the matching of two cards chosen by user
     while True:
         try:
             x1, y1 = [int(x) for x in input("Enter the coordinates of the first card you would like to flip (x, y): ").split()]
@@ -70,7 +70,6 @@ def playTurn(grid, answerGrid):
             continue
     printGrid(grid)
 
-    
     while True:
         try:
             x2, y2 = [int(x) for x in input("Enter the coordinates of the second card you would like to flip (x, y): ").split()]
@@ -84,7 +83,6 @@ def playTurn(grid, answerGrid):
             continue
         except IndexError:
             print("Out of range!")
-    
     printGrid(grid)
 
     if grid[y1 - 1][x1 - 1] == answerGrid[y2 - 1][x2 - 1]:
@@ -99,6 +97,7 @@ def playTurn(grid, answerGrid):
         clear()
 
 def gameOver(grid):
+    # Checks if game is over
     if any("0" in sublist for sublist in grid):
         return False
     else:
