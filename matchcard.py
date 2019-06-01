@@ -52,37 +52,33 @@ def clear():
     else: 
         _ = system('clear')
 
+def flipCard(grid, answerGrid):
+    # This is the sub function of playTurn that handles the coordinates recieved from the user
+    while True:
+        try:
+            x, y = [int(x) for x in input("Coordinates: ").split()]
+            if grid[y - 1][x - 1] == "0":
+                grid[y - 1][x - 1] = answerGrid[y - 1][x - 1]
+                break
+            else:
+                print("You have previously flipped this card! Try again!")
+        except ValueError:
+            print("Something isn't right! Try the coordinates again.")
+            continue
+        except IndexError:
+            print("Out of range!")
+            continue
+            
+    return x, y, grid
+
 def playTurn(grid, answerGrid):
     # This function handles the matching of two cards chosen by user
-    while True:
-        try:
-            x1, y1 = [int(x) for x in input("Enter the coordinates of the first card you would like to flip (x y): ").split()]
-            if grid[y1 - 1][x1 - 1] == "0":
-                grid[y1 - 1][x1 - 1] = answerGrid[y1 - 1][x1 - 1]
-                break
-            else:
-                print("You have previously flipped this card! Try again!")
-        except ValueError:
-            print("Something isn't right! Try the coordinates again.")
-            continue
-        except IndexError:
-            print("Out of range!")
-            continue
+    print("Enter the coordinates of your first card you would like to flip (x y)")
+    x1, y1, grid = flipCard(grid, answerGrid)
     printGrid(grid)
 
-    while True:
-        try:
-            x2, y2 = [int(x) for x in input("Enter the coordinates of the second card you would like to flip (x y): ").split()]
-            if grid[y2 - 1][x2 - 1] == "0":
-                grid[y2 - 1][x2 - 1] = answerGrid[y2 - 1][x2 - 1]
-                break
-            else:
-                print("You have previously flipped this card! Try again!")
-        except ValueError:
-            print("Something isn't right! Try the coordinates again.")
-            continue
-        except IndexError:
-            print("Out of range!")
+    print("Enter the coordinates of your second card you would like to flip (x y)")
+    x2, y2, grid = flipCard(grid, answerGrid)
     printGrid(grid)
 
     if grid[y1 - 1][x1 - 1] == answerGrid[y2 - 1][x2 - 1]:
