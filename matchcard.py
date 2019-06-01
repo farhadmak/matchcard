@@ -19,7 +19,6 @@ def coordInput():
         except ValueError: 
             print("Please select an integer.")
     
-
 def createGrid(size):
     return [["0"] * size for _ in range(size)]
 
@@ -111,9 +110,11 @@ def main():
         grid = createGrid(size)
         answerGrid = createGrid(size)
         populateGrid(answerGrid, size)
+        
         while not gameOver(grid):
             printGrid(grid)
             playTurn(grid, answerGrid)
+        
         if gameOver(grid):
             playAgain = input("Congratz! You won! Would you like to play again? Y/N: ")
             if playAgain == "Y" or playAgain == "y":
