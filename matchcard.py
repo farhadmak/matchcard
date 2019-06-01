@@ -9,6 +9,7 @@ import random
 from os import system, name
 
 def coordInput():
+    # This function takes the user's input for the initial size of the grid
     while True:
         try:
             size = int(input("Please select a size you wish to play (2, 4): "))
