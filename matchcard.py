@@ -68,10 +68,10 @@ def flipCard(grid, answerGrid):
         except IndexError:
             print("Out of range!")
             continue
-            
+
     return x, y, grid
 
-def playTurn(grid, answerGrid):
+def playTurn(grid, answerGrid, score):
     # This function handles the matching of two cards chosen by user
     print("Enter the coordinates of your first card you would like to flip (x y)")
     x1, y1, grid = flipCard(grid, answerGrid)
@@ -91,6 +91,9 @@ def playTurn(grid, answerGrid):
         grid[y2 - 1][x2 - 1] = "0"
         input("Press Enter to try again.")
         clear()
+    
+    score += 1
+    return score
 
 def gameOver(grid):
     # Checks if game is over
@@ -107,12 +110,13 @@ def main():
         grid = createGrid(size)
         answerGrid = createGrid(size)
         populateGrid(answerGrid, size)
-        
+        score = 0
         while not gameOver(grid):
             printGrid(grid)
-            playTurn(grid, answerGrid)
+            score = playTurn(grid, answerGrid, score)
         
         if gameOver(grid):
+            print("Your final score is {}!".format(score))
             playAgain = input("Congratz! You won! Would you like to play again? Y/N: ")
             if playAgain == "Y" or playAgain == "y":
                 continue
