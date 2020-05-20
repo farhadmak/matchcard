@@ -1,4 +1,4 @@
-## ♣️♠️♥️♦️ Match Card Game ♣️♠️♥️♦️
+## ♣️♠️♥️♦️ Match Card Game ♦️♥️♠️♣️
 
 Match Card Game, whereas you turn over two cards at a time and try to find matches.
 
